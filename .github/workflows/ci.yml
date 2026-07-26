@@ -26,6 +26,8 @@ jobs:
           node-version: "22"
           cache: npm
       - run: npm ci --ignore-scripts --no-audit
+      - name: Verify locked compatibility packages
+        run: node -e "const expand = require('brace-expansion'); if (expand('{a,b}').join(',') !== 'a,b') process.exit(1)"
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
