@@ -40,23 +40,23 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "lucide-react": "^0.468.0",
-    "next": "16.2.11",
+    "lucide-react": "^1.27.0",
+    "next": "16.2.12",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@types/node": "22.19.19",
-    "@types/react": "19.2.14",
+    "@types/node": "26.1.1",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
+    "@vitejs/plugin-react": "6.0.4",
+    "@vitejs/plugin-rsc": "0.5.30",
     "brace-expansion": "file:tools/brace-expansion-compat",
-    "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
+    "eslint": "10.8.0",
+    "eslint-config-next": "16.2.12",
     "react-server-dom-webpack": "19.2.8",
-    "typescript": "5.9.3",
-    "vinext": "0.0.50",
+    "typescript": "7.0.2",
+    "vinext": "0.2.1",
     "vite": "8.1.5"
   },
   "type": "module",
