@@ -1,0 +1,134 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Web console
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:demo
+
+  python:
+    name: Python control plane
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: services/control-plane
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: services/control-plane/uv.lock
+      - run: uv sync --locked --extra dev
+      - run: uv run --locked --extra dev ruff format --check skein tests
+      - run: uv run --locked --extra dev ruff check skein tests
+      - run: uv run --locked --extra dev mypy skein
+      - run: uv run --locked --extra dev pytest -W error
+
+  rust:
+    name: Rust fetcher
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: services/fetcher
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: services/fetcher -> target
+      - run: cargo fmt --all -- --check
+      - run: cargo test --locked --all-targets
+      - run: cargo clippy --locked --all-targets -- -D warnings
+
+  postgres:
+    name: PostgreSQL invariants
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17.10-alpine
+        env:
+          POSTGRES_DB: skein_test
+          POSTGRES_USER: skein
+          POSTGRES_PASSWORD: skein-ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U skein -d skein_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      PGPASSWORD: skein-ci
+      SKEIN_TEST_DATABASE_URL: postgresql://skein:skein-ci@127.0.0.1:5432/skein_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: services/control-plane/uv.lock
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install --yes postgresql-client
+      - name: Apply schema
+        run: psql "$SKEIN_TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f infrastructure/postgres/migrations/001_initial.sql
+      - name: Verify database invariants
+        run: psql "$SKEIN_TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f infrastructure/postgres/tests/invariants.sql
+      - name: Test PostgreSQL API repository
+        working-directory: services/control-plane
+        run: |
+          uv sync --locked --extra dev
+          uv run --locked --extra dev pytest -W error tests/test_postgres_api.py
+
+  ci-success:
+    name: CI success
+    if: always()
+    needs: [web, python, rust, postgres]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm all required jobs passed
+        env:
+          WEB: ${{ needs.web.result }}
+          PYTHON: ${{ needs.python.result }}
+          RUST: ${{ needs.rust.result }}
+          POSTGRES: ${{ needs.postgres.result }}
+        run: |
+          test "$WEB" = success
+          test "$PYTHON" = success
+          test "$RUST" = success
+          test "$POSTGRES" = success

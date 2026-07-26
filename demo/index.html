@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071013" />
+    <meta
+      name="description"
+      content="Try Skein, an open-source local-first web intelligence crawler with observable pipelines, SSRF protection, structured data extraction, and evidence-ready exports."
+    />
+    <meta
+      name="keywords"
+      content="web intelligence, open-source web crawler, web scraping, data extraction, local-first crawler, FastAPI crawler, Rust fetcher, SSRF protection"
+    />
+    <meta name="author" content="Muhammad Mahad Azher" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link
+      rel="canonical"
+      href="https://muhammadmahadazher.github.io/skein-web-intelligence/"
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071013'/%3E%3Cpath d='M15 18h25a9 9 0 0 1 0 18H27a7 7 0 0 0 0 14h22' fill='none' stroke='%23f4a641' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Skein Web Intelligence" />
+    <meta property="og:title" content="Skein — Observable web intelligence, locally owned" />
+    <meta
+      property="og:description"
+      content="Explore the interactive Skein product tour, then run the real open-source crawler on your machine."
+    />
+    <meta
+      property="og:url"
+      content="https://muhammadmahadazher.github.io/skein-web-intelligence/"
+    />
+    <meta
+      property="og:image"
+      content="https://muhammadmahadazher.github.io/skein-web-intelligence/assets/skein-hero.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Skein Web Intelligence" />
+    <meta
+      name="twitter:description"
+      content="Open-source, local-first web intelligence with observable crawling and evidence-ready exports."
+    />
+    <meta
+      name="twitter:image"
+      content="https://muhammadmahadazher.github.io/skein-web-intelligence/assets/skein-hero.png"
+    />
+
+    <title>Skein — Open-Source Web Intelligence Crawler</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Skein Web Intelligence",
+        "alternateName": "Skein",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "softwareVersion": "0.2.0",
+        "description": "Open-source, local-first web intelligence crawler with an observable React console, FastAPI orchestration, a Rust hostile-network safety kernel, bounded evidence extraction, and evidence-ready JSON exports.",
+        "url": "https://muhammadmahadazher.github.io/skein-web-intelligence/",
+        "downloadUrl": "https://github.com/muhammadmahadazher/skein-web-intelligence",
+        "codeRepository": "https://github.com/muhammadmahadazher/skein-web-intelligence",
+        "license": "https://opensource.org/license/mit",
+        "author": {
+          "@type": "Person",
+          "name": "Muhammad Mahad Azher",
+          "url": "https://github.com/muhammadmahadazher"
+        },
+        "isAccessibleForFree": true,
+        "featureList": [
+          "Observable website crawling",
+          "SSRF and unsafe-network protection",
+          "Robots-aware bounded collection",
+          "Structured data extraction",
+          "Pause, resume, and cancellation lifecycle",
+          "Evidence-ready JSON export",
+          "Device-local authentication and guest mode"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Skein home">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>
+          <strong>Skein</strong>
+          <small>Web Intelligence</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="#demo">Live demo</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#open-source">Open source</a>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-button" type="button" aria-label="Switch color theme">
+          <span aria-hidden="true">◐</span>
+        </button>
+        <a
+          class="button button-quiet"
+          href="https://github.com/muhammadmahadazher/skein-web-intelligence"
+        >
+          View GitHub
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero">
+        <img
+          class="hero-art"
+          src="./assets/skein-hero.png"
+          alt="A luminous network of guarded website nodes flowing into structured evidence"
+          width="1672"
+          height="941"
+        />
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Open source · MIT · Local first
+          </p>
+          <h1>Turn public websites into <span>inspectable evidence.</span></h1>
+          <p class="hero-copy">
+            Skein is an observable web intelligence crawler built for engineers
+            who need bounded collection, visible progress, strict network
+            safety, and structured results they can verify.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#demo">Launch interactive tour</a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/muhammadmahadazher/skein-web-intelligence#installation"
+            >
+              Install locally
+            </a>
+          </div>
+          <dl class="hero-stats">
+            <div><dt>3</dt><dd>runtime layers</dd></div>
+            <div><dt>8</dt><dd>product surfaces</dd></div>
+            <div><dt>100%</dt><dd>local identity</dd></div>
+            <div><dt>0</dt><dd>cloud accounts required</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="demo" class="section demo-section" aria-labelledby="demo-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Interactive product tour</p>
+            <h2 id="demo-title">See the workflow before you install.</h2>
+          </div>
+          <p>
+            This browser-only tour uses safe sample data. Clone Skein to run the
+            real crawler against authorized public websites.
+          </p>
+        </div>
+
+        <div class="console-shell">
+          <aside id="demoNav" class="console-sidebar" aria-label="Demo navigation">
+            <div class="console-identity">
+              <span class="avatar">G</span>
+              <span><strong>Guest analyst</strong><small>Ephemeral session</small></span>
+            </div>
+            <nav>
+              <button class="nav-item active" type="button" data-view="overview">
+                <span aria-hidden="true">⌁</span> Overview
+              </button>
+              <button class="nav-item" type="button" data-view="runs">
+                <span aria-hidden="true">◫</span> Runs
+                <b id="runCountBadge">2</b>
+              </button>
+              <button class="nav-item" type="button" data-view="explorer">
+                <span aria-hidden="true">⌕</span> Data explorer
+              </button>
+              <button class="nav-item" type="button" data-view="architecture">
+                <span aria-hidden="true">◇</span> Architecture
+              </button>
+            </nav>
+            <div class="sidebar-note">
+              <span aria-hidden="true">⌘</span>
+              Press <kbd>?</kbd> for shortcuts
+            </div>
+          </aside>
+
+          <div class="console-main">
+            <header class="console-header">
+              <button
+                id="menuToggle"
+                class="menu-toggle"
+                type="button"
+                aria-label="Open demo navigation"
+                aria-expanded="false"
+              >
+                ☰
+              </button>
+              <div>
+                <p id="viewKicker">Workspace / Overview</p>
+                <h3 id="viewTitle">Good afternoon, analyst.</h3>
+              </div>
+              <span class="api-state"><i aria-hidden="true"></i> Demo API healthy</span>
+            </header>
+
+            <div class="console-content">
+              <section class="view active" data-panel="overview">
+                <div class="launch-card">
+                  <div>
+                    <span class="card-label">New bounded crawl</span>
+                    <h4>What public website should we inspect?</h4>
+                  </div>
+                  <form id="demoRunForm" class="run-form">
+                    <label class="url-field">
+                      <span class="sr-only">Public website URL</span>
+                      <span aria-hidden="true">◎</span>
+                      <input
+                        id="demoUrl"
+                        type="url"
+                        value="https://example.com"
+                        required
+                        autocomplete="url"
+                      />
+                    </label>
+                    <button id="runButton" class="button button-primary" type="submit">
+                      Run demo scan
+                    </button>
+                  </form>
+                  <p class="field-note">
+                    Tour data is simulated in your browser. The local edition
+                    performs the real robots-aware crawl.
+                  </p>
+                </div>
+
+                <div class="metric-grid" aria-label="Current crawl metrics">
+                  <article><span>Pages discovered</span><strong id="metricDiscovered">0</strong><small>bounded to 12</small></article>
+                  <article><span>Pages fetched</span><strong id="metricFetched">0</strong><small id="fetchTrend">waiting</small></article>
+                  <article><span>Evidence records</span><strong id="metricRecords">0</strong><small>normalized</small></article>
+                  <article><span>Safety decisions</span><strong id="metricSafety">0</strong><small>policy logged</small></article>
+                </div>
+
+                <div class="overview-grid">
+                  <article class="panel run-panel">
+                    <div class="panel-heading">
+                      <div>
+                        <span class="card-label">Live pipeline</span>
+                        <h4 id="runStatus">Ready to scan</h4>
+                      </div>
+                      <span id="runState" class="state-pill">Idle</span>
+                    </div>
+                    <div class="progress-track" aria-label="Crawl progress">
+                      <span id="progressBar"></span>
+                    </div>
+                    <div class="phase-row" aria-label="Crawl phases">
+                      <span class="phase active">Validate</span>
+                      <span class="phase">Policy</span>
+                      <span class="phase">Discover</span>
+                      <span class="phase">Fetch</span>
+                      <span class="phase">Extract</span>
+                      <span class="phase">Finalize</span>
+                    </div>
+                    <div class="run-actions">
+                      <button id="pauseButton" type="button" class="button button-small" disabled>Pause</button>
+                      <button id="cancelButton" type="button" class="button button-small button-danger" disabled>Cancel</button>
+                      <button id="exportButton" type="button" class="button button-small">Export sample JSON</button>
+                    </div>
+                  </article>
+
+                  <article class="panel event-panel">
+                    <div class="panel-heading">
+                      <div>
+                        <span class="card-label">Evidence stream</span>
+                        <h4>Observable by default</h4>
+                      </div>
+                      <span class="live-label"><i aria-hidden="true"></i> Live</span>
+                    </div>
+                    <ol id="eventLog" class="event-log" aria-live="polite">
+                      <li><time>00:00</time><span>Demo workspace ready</span><b>system</b></li>
+                      <li><time>00:00</time><span>Network safety kernel loaded</span><b>policy</b></li>
+                    </ol>
+                  </article>
+                </div>
+              </section>
+
+              <section class="view" data-panel="runs">
+                <div class="panel table-panel">
+                  <div class="panel-heading">
+                    <div>
+                      <span class="card-label">Run history</span>
+                      <h4>Every lifecycle remains inspectable.</h4>
+                    </div>
+                    <label class="search-control">
+                      <span class="sr-only">Search runs</span>
+                      <span aria-hidden="true">⌕</span>
+                      <input id="runSearch" type="search" placeholder="Search runs" />
+                    </label>
+                  </div>
+                  <div class="table-scroll">
+                    <table>
+                      <thead><tr><th>Target</th><th>Status</th><th>Pages</th><th>Duration</th><th>Finished</th></tr></thead>
+                      <tbody id="runsTable">
+                        <tr><td>example.org</td><td><span class="state-pill complete">Complete</span></td><td>8 / 8</td><td>3.8s</td><td>12 min ago</td></tr>
+                        <tr><td>iana.org</td><td><span class="state-pill complete">Complete</span></td><td>12 / 12</td><td>5.2s</td><td>Yesterday</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+
+              <section class="view" data-panel="explorer">
+                <div class="panel table-panel">
+                  <div class="panel-heading explorer-heading">
+                    <div>
+                      <span class="card-label">Structured evidence</span>
+                      <h4>Search, filter, inspect, export.</h4>
+                    </div>
+                    <div class="filter-row">
+                      <label class="search-control">
+                        <span class="sr-only">Search evidence</span>
+                        <span aria-hidden="true">⌕</span>
+                        <input id="evidenceSearch" type="search" placeholder="Search evidence" />
+                      </label>
+                      <select id="statusFilter" aria-label="Filter by HTTP status">
+                        <option value="all">All statuses</option>
+                        <option value="200">200 OK</option>
+                        <option value="301">301 Redirect</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="table-scroll">
+                    <table>
+                      <thead><tr><th>Page</th><th>Title</th><th>Status</th><th>Words</th><th>JSON-LD</th></tr></thead>
+                      <tbody id="evidenceTable">
+                        <tr data-status="200"><td>/</td><td>Example Domain</td><td>200</td><td>28</td><td>0</td></tr>
+                        <tr data-status="200"><td>/domains</td><td>Domain Names</td><td>200</td><td>642</td><td>1</td></tr>
+                        <tr data-status="301"><td>/help</td><td>Redirected resource</td><td>301</td><td>0</td><td>0</td></tr>
+                        <tr data-status="200"><td>/protocols</td><td>Protocol Registries</td><td>200</td><td>918</td><td>2</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <footer class="table-footer">
+                    <span id="evidenceCount">4 evidence records</span>
+                    <button id="explorerExport" class="button button-small" type="button">Export visible</button>
+                  </footer>
+                </div>
+              </section>
+
+              <section class="view" data-panel="architecture">
+                <div class="architecture-card">
+                  <div>
+                    <span class="card-label">System architecture</span>
+                    <h4>One observable chain from URL policy to evidence.</h4>
+                    <p>
+                      The React console talks to a FastAPI control plane. A Rust
+                      worker boundary handles hostile-network fetch concerns,
+                      while PostgreSQL provides durable runs, leases, lineage,
+                      audit events, and an outbox for scale-out operation.
+                    </p>
+                    <ul>
+                      <li>Validate destination before every request and redirect</li>
+                      <li>Keep crawl scope, body size, timeout, and concurrency bounded</li>
+                      <li>Expose phase progress, ETA, lifecycle actions, and evidence lineage</li>
+                    </ul>
+                    <a
+                      class="button button-secondary"
+                      href="https://github.com/muhammadmahadazher/skein-web-intelligence/blob/main/docs/architecture.md"
+                    >
+                      Read architecture
+                    </a>
+                  </div>
+                  <img
+                    src="./assets/skein-workflow.png"
+                    alt="Websites flowing through a security gateway and crawler workers into structured evidence and an operator dashboard"
+                    width="1672"
+                    height="941"
+                    loading="lazy"
+                  />
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture" class="section architecture-section">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Built for trustworthy collection</p>
+            <h2>Fast enough to explore. Strict enough to trust.</h2>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article><span>01</span><h3>Observable</h3><p>Progress, ETA, phase transitions, lifecycle controls, timings, and evidence remain visible.</p></article>
+          <article><span>02</span><h3>Bounded</h3><p>Scope, redirects, concurrency, timeouts, response bodies, and destinations are deliberately constrained.</p></article>
+          <article><span>03</span><h3>Local first</h3><p>Accounts live in your browser, crawling runs on your machine, and guest sessions vanish with the tab.</p></article>
+          <article><span>04</span><h3>Composable</h3><p>React, FastAPI, Rust, and PostgreSQL boundaries can evolve independently without hiding lineage.</p></article>
+        </div>
+      </section>
+
+      <section id="open-source" class="section cta-section">
+        <div>
+          <p class="eyebrow">Open source from the first thread</p>
+          <h2>Inspect it. Run it. Improve it.</h2>
+          <p>
+            Skein is licensed under MIT and welcomes careful
+            contributions to crawling, extraction, accessibility, security,
+            observability, documentation, and developer experience.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href="https://github.com/muhammadmahadazher/skein-web-intelligence"
+            >
+              Explore the repository
+            </a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/muhammadmahadazher/skein-web-intelligence/blob/main/CONTRIBUTING.md"
+            >
+              Contribute
+            </a>
+          </div>
+        </div>
+        <pre aria-label="Quick start"><code>git clone https://github.com/muhammadmahadazher/skein-web-intelligence.git
+cd skein-web-intelligence
+npm ci
+npm run dev</code></pre>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span><strong>Skein</strong><small>Observable web intelligence</small></span>
+      </div>
+      <p>Built in the open by Muhammad Mahad Azher and contributors.</p>
+      <nav aria-label="Footer">
+        <a href="https://github.com/muhammadmahadazher/skein-web-intelligence">GitHub</a>
+        <a href="https://github.com/muhammadmahadazher/skein-web-intelligence/blob/main/SECURITY.md">Security</a>
+        <a href="https://github.com/muhammadmahadazher/skein-web-intelligence/blob/main/LICENSE">License</a>
+      </nav>
+    </footer>
+
+    <dialog id="shortcutDialog">
+      <form method="dialog">
+        <header><h2>Keyboard shortcuts</h2><button aria-label="Close">×</button></header>
+        <dl>
+          <div><dt><kbd>/</kbd></dt><dd>Focus current search or URL field</dd></div>
+          <div><dt><kbd>G</kbd> <kbd>O</kbd></dt><dd>Open Overview</dd></div>
+          <div><dt><kbd>G</kbd> <kbd>R</kbd></dt><dd>Open Runs</dd></div>
+          <div><dt><kbd>G</kbd> <kbd>E</kbd></dt><dd>Open Data explorer</dd></div>
+          <div><dt><kbd>G</kbd> <kbd>A</kbd></dt><dd>Open Architecture</dd></div>
+          <div><dt><kbd>?</kbd></dt><dd>Show this dialog</dd></div>
+        </dl>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

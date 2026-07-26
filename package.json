@@ -1,0 +1,67 @@
+{
+  "name": "skein-web-intelligence",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Local-first web intelligence crawler with observable pipelines, strict SSRF protection, and evidence-ready exports.",
+  "license": "MIT",
+  "author": "Muhammad Mahad Azher",
+  "homepage": "https://muhammadmahadazher.github.io/skein-web-intelligence/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhammadmahadazher/skein-web-intelligence.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muhammadmahadazher/skein-web-intelligence/issues"
+  },
+  "keywords": [
+    "web-crawler",
+    "web-intelligence",
+    "web-scraping",
+    "data-extraction",
+    "local-first",
+    "ssrf-protection",
+    "fastapi",
+    "rust",
+    "react"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vinext dev",
+    "build": "vinext build",
+    "start": "vinext start",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "test:source": "node --test tests/source-contract.test.mjs",
+    "test:demo": "node scripts/validate-demo.mjs",
+    "test:browser": "node tests/browser-exhaustive.mjs",
+    "test:load": "node tests/load-api.mjs",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .codex-incomplete-node-modules-20260723 --ignore-pattern .codex-edit-staging --ignore-pattern .codex-edit-staging-2 --ignore-pattern .codex-design-review",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "next": "16.2.11",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.6",
+    "react-server-dom-webpack": "19.2.8",
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.1.5"
+  },
+  "type": "module",
+  "overrides": {
+    "brace-expansion": "file:tools/brace-expansion-compat",
+    "postcss": "8.5.22",
+    "sharp": "0.35.0"
+  }
+}

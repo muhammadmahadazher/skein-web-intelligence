@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If Skein supports your research or engineering work, please cite it using this metadata."
+title: "Skein Web Intelligence"
+type: software
+version: 0.2.0
+date-released: 2026-07-26
+authors:
+  - family-names: "Azher"
+    given-names: "Muhammad Mahad"
+repository-code: "https://github.com/muhammadmahadazher/skein-web-intelligence"
+url: "https://muhammadmahadazher.github.io/skein-web-intelligence/"
+license: MIT
+keywords:
+  - web intelligence
+  - web crawler
+  - web scraping
+  - data extraction
+  - local-first
+  - SSRF protection
+abstract: >-
+  Skein is an open-source, local-first web intelligence crawler with an
+  observable React console, FastAPI orchestration, a Rust hostile-network
+  safety kernel, bounded evidence extraction, and evidence-ready exports.

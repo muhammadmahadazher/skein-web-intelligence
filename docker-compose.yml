@@ -1,0 +1,62 @@
+name: skein
+
+services:
+  postgres:
+    image: postgres:17.10-alpine
+    environment:
+      POSTGRES_DB: skein
+      POSTGRES_USER: skein
+      POSTGRES_PASSWORD: local-only-skein
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./infrastructure/postgres/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skein -d skein"]
+      interval: 3s
+      timeout: 2s
+      retries: 20
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  control-plane:
+    build:
+      context: ./services/control-plane
+    environment:
+      DATABASE_URL: postgresql://skein:local-only-skein@postgres:5432/skein
+      SKEIN_WORKSPACE_ID: 00000000-0000-4000-8000-000000000099
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: ["ALL"]
+    restart: unless-stopped
+
+  fetcher:
+    build:
+      context: ./services/fetcher
+    environment:
+      DATABASE_URL: postgresql://skein:local-only-skein@postgres:5432/skein
+      WORKER_ID: local-fetcher-01
+      RUST_LOG: skein_fetcher=info
+    depends_on:
+      postgres:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: ["ALL"]
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

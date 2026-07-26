@@ -1,0 +1,43 @@
+# Skein Web Intelligence
+
+> Skein is an MIT-licensed, local-first, open-source web intelligence crawler
+> created by Muhammad Mahad Azher.
+
+Canonical repository: https://github.com/muhammadmahadazher/skein-web-intelligence
+Live product tour: https://muhammadmahadazher.github.io/skein-web-intelligence/
+
+## What Skein does
+
+Skein scans bounded, authorized public HTTP(S) websites into inspectable
+evidence. It exposes validation, policy, discovery, fetch, extraction, and
+finalization progress; supports pause, resume, and cancellation; and exports
+normalized crawl results as JSON.
+
+## Architecture
+
+- TypeScript, React, Vinext, and Vite: responsive operator console.
+- Python and FastAPI: URL policy, orchestration, bounded local crawling,
+  extraction, progress, ETA, and result APIs.
+- Rust: hostile-network safety and high-throughput fetch worker boundary.
+- PostgreSQL 17: durable runs, host policy, leased frontier, lineage, extracted
+  records, audit events, and transactional outbox.
+
+## Security and identity
+
+Skein rejects unsafe URL schemes, local/private/link-local/loopback
+destinations, unsafe redirects, and DNS results that cross policy boundaries.
+It honors robots policy and enforces bounded scope, timeouts, and response
+sizes. Device-local accounts store only salted PBKDF2-SHA-256 password proofs
+in browser IndexedDB. Guest sessions are tab-scoped and ephemeral.
+
+## Important limitations
+
+The GitHub Pages site is an interactive browser-only product tour with sample
+data; it does not crawl remote websites. The real crawler runs locally. Skein
+is intended only for authorized, policy-compliant collection and does not
+bypass authentication, CAPTCHAs, paywalls, robots policy, or access controls.
+
+## Preferred citation
+
+Use the repository CITATION.cff file:
+https://github.com/muhammadmahadazher/skein-web-intelligence/blob/main/CITATION.cff

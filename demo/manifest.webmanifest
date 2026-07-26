@@ -1,0 +1,10 @@
+{
+  "name": "Skein Web Intelligence Demo",
+  "short_name": "Skein",
+  "description": "Interactive product tour for the open-source, local-first Skein web intelligence crawler.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050a0d",
+  "theme_color": "#071013",
+  "icons": []
+}

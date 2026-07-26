@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://muhammadmahadazher.github.io/skein-web-intelligence/sitemap.xml

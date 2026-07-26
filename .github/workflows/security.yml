@@ -1,0 +1,59 @@
+name: Dependency security
+
+on:
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "23 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit
+      - run: npm audit --audit-level=high
+
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+      - working-directory: services/control-plane
+        run: uv export --locked --extra dev --format requirements-txt --no-hashes --output-file requirements-audit.txt
+      - working-directory: services/control-plane
+        run: uvx --from pip-audit pip-audit --requirement requirements-audit.txt
+
+  rust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: services/fetcher
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88.0"
+      - uses: taiki-e/install-action@cargo-audit
+      - name: Audit locked Rust dependencies
+        # RUSTSEC-2023-0071 is an inactive transitive rsa advisory with no
+        # available fixed version in the current sqlx dependency graph.
+        run: cargo audit --file Cargo.lock --ignore RUSTSEC-2023-0071
