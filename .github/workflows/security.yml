@@ -1,6 +1,8 @@
 name: Dependency security
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   schedule:
@@ -19,8 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: "22"
           cache: npm
@@ -31,13 +33,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v10.0.1
       - working-directory: services/control-plane
-        run: uv export --locked --extra dev --format requirements-txt --no-hashes --output-file requirements-audit.txt
+        run: uv export --locked --extra dev --no-emit-project --format requirements-txt --no-hashes --output-file requirements-audit.txt
       - working-directory: services/control-plane
         run: uvx --from pip-audit pip-audit --requirement requirements-audit.txt
 
@@ -48,11 +50,13 @@ jobs:
       run:
         working-directory: services/fetcher
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: "1.88.0"
-      - uses: taiki-e/install-action@cargo-audit
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-audit
       - name: Audit locked Rust dependencies
         # RUSTSEC-2023-0071 is an inactive transitive rsa advisory with no
         # available fixed version in the current sqlx dependency graph.
