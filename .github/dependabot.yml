@@ -5,9 +5,24 @@ updates:
     schedule:
       interval: weekly
     groups:
-      web-dependencies:
-        patterns: ["*"]
-    open-pull-requests-limit: 5
+      web-runtime:
+        dependency-type: production
+        update-types: ["minor", "patch"]
+      web-tooling:
+        dependency-type: development
+        update-types: ["minor", "patch"]
+    ignore:
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: next
+        update-types: ["version-update:semver-major"]
+      - dependency-name: vinext
+        update-types: ["version-update:semver-major"]
+      - dependency-name: vite
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 3
 
   - package-ecosystem: pip
     directory: /services/control-plane
@@ -16,7 +31,8 @@ updates:
     groups:
       python-dependencies:
         patterns: ["*"]
-    open-pull-requests-limit: 5
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 3
 
   - package-ecosystem: cargo
     directory: /services/fetcher
@@ -25,7 +41,8 @@ updates:
     groups:
       rust-dependencies:
         patterns: ["*"]
-    open-pull-requests-limit: 5
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 3
 
   - package-ecosystem: github-actions
     directory: /
@@ -34,4 +51,4 @@ updates:
     groups:
       actions:
         patterns: ["*"]
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3

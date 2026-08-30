@@ -20,17 +20,17 @@ transactional outbox becomes the measured bottleneck.
 
 ## Local measurements
 
-Measured on 2026-07-26 against the running local FastAPI service:
+Measured on 2026-08-30 against the running local FastAPI service:
 
 | Scenario | Requests | Concurrency | RPS | p50 | p95 | p99 | Errors |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Health | 1,000 | 50 | 2,407.1 | 16.96 ms | 36.82 ms | 60.28 ms | 0 |
-| Run list | 500 | 30 | 2,393.9 | 11.93 ms | 18.02 ms | 18.61 ms | 0 |
-| Unsafe URL rejection | 250 | 25 | 1,297.9 | 17.23 ms | 29.78 ms | 32.83 ms | 0 |
+| Health | 1,000 | 50 | 2,124.1 | 16.54 ms | 57.02 ms | 74.44 ms | 0 |
+| Run list | 500 | 30 | 1,538.2 | 18.82 ms | 23.33 ms | 24.86 ms | 0 |
+| Unsafe URL rejection | 250 | 25 | 1,074.8 | 22.58 ms | 26.81 ms | 29.95 ms | 0 |
 
-A bounded live crawl of python.org completed eight pages with eight evidence
-records and zero failures. With the host budget set to four requests per second,
-the observed end-to-end rate was 3.55 pages per second.
+A bounded live crawl of python.org completed 30 pages with 30 evidence records
+and zero failures. Under the default polite host budget, the observed
+end-to-end rate was 1.4 pages per second.
 
 These measurements are development-machine baselines, not production capacity
 claims. Production SLOs require a staging environment, representative page
