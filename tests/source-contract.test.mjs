@@ -97,6 +97,15 @@ test("patched brace expansion remains compatible with legacy lint consumers", as
   assert.match(patchedCore, /EXPANSION_MAX_LENGTH = 4_000_000/);
 });
 
+test("development server preserves the documented Windows launcher port", async () => {
+  const manifest = JSON.parse(await read("package.json"));
+  assert.match(manifest.scripts.dev, /--port 3000\b/);
+  const launcher = await read("scripts/start-skein.ps1");
+  for (const name of ["brace-expansion-compat", "brace-expansion-core", "braces-safe"]) {
+    assert.ok(launcher.includes(`"${name}"`), `${name} must be copied to the runtime`);
+  }
+});
+
 test("device-local authentication stores only salted password proofs", async () => {
   const source = await read("app/local-auth.ts");
   assert.match(source, /indexedDB\.open\(DATABASE_NAME, DATABASE_VERSION\)/);
