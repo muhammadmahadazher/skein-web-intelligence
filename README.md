@@ -162,6 +162,8 @@ plane—not a storage location for unbounded response bodies.
 Read the [architecture](docs/architecture.md),
 [threat model](docs/threat-model.md), and
 [performance notes](docs/performance.md) for the full reasoning.
+See [dependency maintenance](docs/dependency-maintenance.md) for compatible
+upgrade groups, security overrides, and the tested local security patches.
 
 ## Security model
 

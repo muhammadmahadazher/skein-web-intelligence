@@ -40,31 +40,34 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "lucide-react": "^1.34.0",
-    "next": "16.3.3",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "lucide-react": "^1.53.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@types/node": "26.4.0",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
-    "@vitejs/plugin-react": "6.1.1",
-    "@vitejs/plugin-rsc": "0.5.34",
+    "@types/node": "26.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@vitejs/plugin-rsc": "0.5.36",
     "brace-expansion": "file:tools/brace-expansion-compat",
+    "braces": "file:tools/braces-safe",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.3.3",
-    "react-server-dom-webpack": "19.2.8",
+    "eslint-config-next": "16.4.0",
+    "react-server-dom-webpack": "19.3.0",
     "typescript": "6.0.3",
-    "vinext": "1.0.0-beta.8",
-    "vite": "8.2.2"
+    "vinext": "1.0.1",
+    "vite": "8.3.4"
   },
   "type": "module",
   "overrides": {
     "brace-expansion": "file:tools/brace-expansion-compat",
-    "fast-uri": "3.1.5",
+    "braces": "$braces",
+    "fast-uri": "3.1.8",
+    "fflate": "0.7.5",
     "nanoid": "3.3.18",
     "postcss": "8.5.26",
-    "sharp": "0.35.0"
+    "sharp": "0.35.5"
   }
 }
