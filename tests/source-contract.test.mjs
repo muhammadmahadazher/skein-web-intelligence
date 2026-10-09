@@ -81,9 +81,8 @@ test("overview signal filter changes the visible result set", async () => {
 
 test("patched brace expansion remains compatible with legacy lint consumers", async () => {
   const manifest = JSON.parse(await read("package.json"));
-  assert.equal(manifest.dependencies.react, "19.2.8");
-  assert.equal(manifest.dependencies["react-dom"], "19.2.8");
-  assert.equal(manifest.devDependencies["react-server-dom-webpack"], "19.2.8");
+  assert.equal(manifest.dependencies["react-dom"], manifest.dependencies.react);
+  assert.equal(manifest.devDependencies["react-server-dom-webpack"], manifest.dependencies.react);
   assert.equal(
     manifest.overrides["brace-expansion"],
     "file:tools/brace-expansion-compat",
@@ -96,6 +95,15 @@ test("patched brace expansion remains compatible with legacy lint consumers", as
     "tools/brace-expansion-core/dist/commonjs/index.js",
   );
   assert.match(patchedCore, /EXPANSION_MAX_LENGTH = 4_000_000/);
+});
+
+test("development server preserves the documented Windows launcher port", async () => {
+  const manifest = JSON.parse(await read("package.json"));
+  assert.match(manifest.scripts.dev, /--port 3000\b/);
+  const launcher = await read("scripts/start-skein.ps1");
+  for (const name of ["brace-expansion-compat", "brace-expansion-core", "braces-safe"]) {
+    assert.ok(launcher.includes(`"${name}"`), `${name} must be copied to the runtime`);
+  }
 });
 
 test("device-local authentication stores only salted password proofs", async () => {

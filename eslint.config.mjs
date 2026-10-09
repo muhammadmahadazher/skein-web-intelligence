@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Upstream vendored code; behavior is checked by braces-safety.test.mjs.
+    "tools/braces-safe/**",
   ]),
 ]);
 
