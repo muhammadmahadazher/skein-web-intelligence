@@ -42,8 +42,8 @@
   "dependencies": {
     "lucide-react": "^1.53.0",
     "next": "16.4.0",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/node": "26.6.4",
@@ -55,7 +55,7 @@
     "braces": "file:tools/braces-safe",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.0",
-    "react-server-dom-webpack": "19.3.0",
+    "react-server-dom-webpack": "19.3.1",
     "typescript": "6.0.3",
     "vinext": "1.0.1",
     "vite": "8.3.4"
