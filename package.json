@@ -46,18 +46,18 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@types/node": "26.6.4",
+    "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.2",
-    "@vitejs/plugin-rsc": "0.5.36",
+    "@vitejs/plugin-rsc": "0.5.38",
     "brace-expansion": "file:tools/brace-expansion-compat",
     "braces": "file:tools/braces-safe",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.4.0",
+    "eslint-config-next": "16.4.1",
     "react-server-dom-webpack": "19.3.0",
     "typescript": "6.0.3",
-    "vinext": "1.0.1",
+    "vinext": "1.2.0",
     "vite": "8.3.4"
   },
   "type": "module",
