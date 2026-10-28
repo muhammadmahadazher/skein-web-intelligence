@@ -7,7 +7,7 @@ const braces = require("braces");
 const depthError = { code: "ERR_BRACES_DEPTH" };
 
 test("installed glob consumers resolve the patched local package", () => {
-  assert.equal(require("braces/package.json").version, "3.0.3-skein.1");
+  assert.equal(require("braces/package.json").version, "3.0.3+skein.1");
   const consumer = createRequire(require.resolve("micromatch"));
   assert.equal(consumer.resolve("braces"), require.resolve("braces"));
   const pattern = "{".repeat(1000) + "a,b" + "}".repeat(1000);
