@@ -22,7 +22,7 @@ New-Item -ItemType Directory -Force -Path (Join-Path $RuntimeRoot "app"), (Join-
 Copy-Item -Path (Join-Path $ProjectRoot "app\*") -Destination (Join-Path $RuntimeRoot "app") -Recurse -Force
 Copy-Item -Path (Join-Path $ProjectRoot "public\*") -Destination (Join-Path $RuntimeRoot "public") -Recurse -Force
 New-Item -ItemType Directory -Force -Path (Join-Path $RuntimeRoot "tools") | Out-Null
-foreach ($package in @("brace-expansion-compat", "brace-expansion-core", "braces-safe")) {
+foreach ($package in @("brace-expansion-compat", "braces-safe")) {
     Copy-Item -LiteralPath (Join-Path $ProjectRoot "tools\$package") -Destination (Join-Path $RuntimeRoot "tools") -Recurse -Force
 }
 foreach ($file in @(

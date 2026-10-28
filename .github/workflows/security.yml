@@ -28,7 +28,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit
       - name: Verify local security patches
-        run: node --test tests/braces-safety.test.mjs
+        run: node --test tests/braces-safety.test.mjs tests/brace-expansion-safety.test.mjs
       - run: npm audit --audit-level=high
 
   python:
@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
-      - uses: astral-sh/setup-uv@v10.2.0
+      - uses: astral-sh/setup-uv@v10.3.0
       - working-directory: services/control-plane
         run: uv export --locked --extra dev --no-emit-project --format requirements-txt --no-hashes --output-file requirements-audit.txt
       - working-directory: services/control-plane

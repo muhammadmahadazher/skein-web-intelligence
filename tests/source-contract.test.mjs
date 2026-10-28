@@ -85,23 +85,22 @@ test("patched brace expansion remains compatible with legacy lint consumers", as
   assert.equal(manifest.devDependencies["react-server-dom-webpack"], manifest.dependencies.react);
   assert.equal(
     manifest.overrides["brace-expansion"],
-    "file:tools/brace-expansion-compat",
+    "$brace-expansion",
   );
 
   const expand = require("brace-expansion");
   assert.deepEqual(expand("{a,b}{1,2}"), ["a1", "a2", "b1", "b2"]);
 
-  const patchedCore = await read(
-    "tools/brace-expansion-core/dist/commonjs/index.js",
-  );
-  assert.match(patchedCore, /EXPANSION_MAX_LENGTH = 4_000_000/);
+  const patchedCore = require("brace-expansion-core");
+  assert.equal(require("brace-expansion-core/package.json").version, "5.0.12");
+  assert.equal(patchedCore.EXPANSION_MAX_LENGTH, 4_000_000);
 });
 
 test("development server preserves the documented Windows launcher port", async () => {
   const manifest = JSON.parse(await read("package.json"));
   assert.match(manifest.scripts.dev, /--port 3000\b/);
   const launcher = await read("scripts/start-skein.ps1");
-  for (const name of ["brace-expansion-compat", "brace-expansion-core", "braces-safe"]) {
+  for (const name of ["brace-expansion-compat", "braces-safe"]) {
     assert.ok(launcher.includes(`"${name}"`), `${name} must be copied to the runtime`);
   }
 });
