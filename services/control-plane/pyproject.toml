@@ -31,6 +31,8 @@ packages = ["skein"]
 addopts = "-q --strict-markers --disable-warnings"
 testpaths = ["tests"]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+asyncio_default_test_loop_scope = "function"
 
 [tool.ruff]
 line-length = 100

@@ -16,6 +16,9 @@ require AnyIO >=4.15.1 because older plugins import pytest's deprecated
 ([upstream issue](https://github.com/agronholm/anyio/issues/1271)). Update the
 plugin and lockfile together; do not disable warnings-as-errors or plugin
 loading to make dependency PRs green.
+Both async fixture and test event-loop scopes are explicitly `function`,
+so tests stay isolated and pytest-asyncio default changes cannot silently
+alter their lifetime. Dependency policy tests enforce that choice.
 
 ESLint 9 and TypeScript 6 remain pinned to the versions supported by the current
 Next lint plugins. Major upgrades require checking the peer dependency graph,
