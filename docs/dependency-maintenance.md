@@ -29,6 +29,14 @@ versions within the upstream major line. Reevaluate them when parent packages
 adopt the fixes. Lockfile updates must pass the dependency-security workflow;
 do not force installs with `--legacy-peer-deps` or weaken the audit gate.
 
+The minimatch override is deliberately limited to vulnerable modern versions
+(`>=7 <11.0.1`) for GHSA-g3hv-75wg-m249. It upgrades the TypeScript parser's
+modern dependency while leaving legacy callable v3 consumers unchanged.
+The patched major supports the existing Node toolchain. Regression tests
+exercise both installed interfaces and the preprocessing amplification bound
+in a timeout- and memory-bounded child process. Reevaluate the override when
+typescript-eslint adopts the patched major upstream.
+
 `tools/braces-safe` is a local MIT-licensed defense-in-depth nesting guard.
 The advisory that prompted it was withdrawn on 2026-10-23. Its
 [patch rationale](../tools/braces-safe/PATCH.md) and
