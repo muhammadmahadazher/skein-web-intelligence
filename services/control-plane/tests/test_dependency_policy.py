@@ -1,5 +1,7 @@
+import tomllib
 from pathlib import Path
 
+import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -28,3 +30,12 @@ def test_python_updates_use_uv_lockfile_support() -> None:
     assert "asyncpg-stubs" in groups["python-typing"]["patterns"]
     assert "asyncpg-stubs" in groups["python-dependencies"]["exclude-patterns"]
     assert "update-types" not in groups["python-typing"]
+
+
+@pytest.mark.parametrize("kind", ["fixture", "test"])
+def test_async_event_loops_are_explicitly_isolated(kind: str) -> None:
+    project = tomllib.loads(
+        (ROOT / "services/control-plane/pyproject.toml").read_text(encoding="utf-8")
+    )
+    settings = project["tool"]["pytest"]["ini_options"]
+    assert settings[f"asyncio_default_{kind}_loop_scope"] == "function"
