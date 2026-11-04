@@ -13,6 +13,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+  # Older AnyIO pytest plugins fail at startup with pytest 9.2 and -W error.
+  "anyio>=4.15.1,<5",
   "asyncpg-stubs>=0.31,<0.33",
   "hypothesis>=6.136,<7",
   "mypy>=1.16,<3",
@@ -29,6 +31,8 @@ packages = ["skein"]
 addopts = "-q --strict-markers --disable-warnings"
 testpaths = ["tests"]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+asyncio_default_test_loop_scope = "function"
 
 [tool.ruff]
 line-length = 100
