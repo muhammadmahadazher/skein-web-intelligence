@@ -10,6 +10,13 @@ native `uv` ecosystem so updates maintain both the manifest and `uv.lock`.
 A separate typing group includes pre-1.0 typing releases; regenerate `uv.lock`
 whenever changing `pyproject.toml` and verify with `uv lock --check`.
 
+Keep pytest and its auto-loaded plugins compatible. The dev dependencies
+require AnyIO >=4.15.1 because older plugins import pytest's deprecated
+`CallSpec2` alias and fail before collection under pytest 9.2 with `-W error`
+([upstream issue](https://github.com/agronholm/anyio/issues/1271)). Update the
+plugin and lockfile together; do not disable warnings-as-errors or plugin
+loading to make dependency PRs green.
+
 ESLint 9 and TypeScript 6 remain pinned to the versions supported by the current
 Next lint plugins. Major upgrades require checking the peer dependency graph,
 lint, types, production build, and rendered application tests together.
