@@ -1,6 +1,7 @@
 use anyhow::{Context, Result};
 use reqwest::redirect::Policy;
-use sqlx::postgres::PgPoolOptions;
+use sqlx_core::query_scalar::query_scalar;
+use sqlx_postgres::PgPoolOptions;
 use std::{env, time::Duration};
 use tracing::{info, warn};
 
@@ -43,7 +44,7 @@ async fn main() -> Result<()> {
             _ = tokio::time::sleep(Duration::from_millis(250)) => {
                 // Claiming, robots/politeness, DNS revalidation, and fetch/commit are
                 // split into independently testable adapters in the next milestone.
-                if let Err(error) = sqlx::query_scalar::<_, bool>("SELECT TRUE")
+                if let Err(error) = query_scalar::<_, bool>("SELECT TRUE")
                     .fetch_one(&pool)
                     .await
                 {
