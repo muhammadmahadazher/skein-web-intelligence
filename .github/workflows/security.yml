@@ -28,7 +28,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts --no-audit
       - name: Verify local security patches
-        run: node --test tests/braces-safety.test.mjs tests/brace-expansion-safety.test.mjs
+        run: node --test tests/*-safety.test.mjs
       - run: npm audit --audit-level=high
 
   python:
