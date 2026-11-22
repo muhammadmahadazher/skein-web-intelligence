@@ -39,3 +39,27 @@ def test_async_event_loops_are_explicitly_isolated(kind: str) -> None:
     )
     settings = project["tool"]["pytest"]["ini_options"]
     assert settings[f"asyncio_default_{kind}_loop_scope"] == "function"
+
+
+@pytest.mark.parametrize(
+    ("lock_path", "name", "minimum"),
+    [
+        ("services/control-plane/uv.lock", "opentelemetry-api", (1, 45, 2)),
+        ("services/fetcher/Cargo.lock", "url", (2, 5, 9)),
+        ("services/fetcher/Cargo.lock", "rustix", (1, 1, 6)),
+        ("services/fetcher/Cargo.lock", "quinn-udp", (0, 5, 16)),
+    ],
+)
+def test_locked_dependencies_preserve_security_fixes(
+    lock_path: str, name: str, minimum: tuple[int, int, int]
+) -> None:
+    lock = tomllib.loads((ROOT / lock_path).read_text(encoding="utf-8"))
+    versions = [package["version"] for package in lock["package"] if package["name"] == name]
+    assert versions, f"Expected dependency {name} in {lock_path}"
+    for raw in versions:
+        # These advisories have numeric stable fixes; do not accept a prerelease.
+        assert "-" not in raw
+        version = tuple(int(part) for part in raw.split("+", 1)[0].split("."))
+        assert version >= minimum, f"{name} {raw} predates its security fix"
+        if name == "quinn-udp":
+            assert version < (0, 6, 0) or version >= (0, 6, 3)
